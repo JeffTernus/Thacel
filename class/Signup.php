@@ -18,14 +18,18 @@ class Signup
 			}
 			if ($key == "first_name") {
 				if (is_numeric($value)) {
-					$this->error =
-						$this->error . "First name can't be a number<br>";
+					$this->error = $this->error . "First name can't be a number<br>";
+				}
+				if (strstr($value, " ")) {
+					$this->error = $this->error . "First name can't have a space<br>";
 				}
 			}
 			if ($key == "last_name") {
 				if (is_numeric($value)) {
-					$this->error =
-						$this->error . "Last name can't be a number<br>";
+					$this->error = $this->error . "Last name can't be a number<br>";
+				}
+				if (strstr($value, " ")) {
+					$this->error = $this->error . "Last name can't have space<br>";
 				}
 			}
 		}
@@ -39,8 +43,8 @@ class Signup
 
 	public function create_user($data)
 	{
-		$first_name = $data["first_name"];
-		$last_name = $data["last_name"];
+		$first_name = ucfirst($data["first_name"]);
+		$last_name = ucfirst($data["last_name"]);
 		$gender = $data["gender"];
 		$email = $data["email"];
 		$password = $data["password"];
