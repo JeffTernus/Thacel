@@ -31,15 +31,22 @@ class Login
 	}
 	public function check_login($id)
 	{
-		$query = "SELECT userid FROM users WHERE userid = '$id' LIMIT 1 ";
+		if (is_numeric($id)) {
+			$query = "SELECT * FROM users WHERE userid = '$id' LIMIT 1 ";
 
-		$DB = new Database();
-		$result = $DB->read($query);
+			$DB = new Database();
+			$result = $DB->read($query);
 
-		if ($result) {
-			return true;
+			if ($result) {
+				$user_data = $result[0];
+				return $user_data;
+			} else {
+				header("Location: login.php");
+				die;
+			}
+		} else {
+			header("Location: login.php");
+			die();
 		}
-
-		return false;
 	}
 }

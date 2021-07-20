@@ -6,32 +6,9 @@ include "class/Login.php";
 include "class/User.php";
 include "class/Post.php";
 
-if (
-	isset($_SESSION["thacel_userid"]) &&
-	is_numeric($_SESSION["thacel_userid"])
-) {
-	$id = $_SESSION["thacel_userid"];
-	$login = new Login();
-
-	$result = $login->check_login($id);
-
-	if ($result) {
-		$user = new User();
-		$user_data = $user->get_data($id);
-
-		if (!$user_data) {
-			header("Location: login.php");
-			die();
-		}
-	} else {
-		header("Location: login.php");
-		die();
-	}
-} else {
-	header("Location: login.php");
-	die();
-}
-
+//isset($_SESSION["thacel_userid"]);
+$login = new Login();
+$user_data = $login->check_login($_SESSION['thacel_userid']);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$post = new Post();
 	$id = $_SESSION["thacel_userid"];
@@ -53,7 +30,7 @@ $id = $_SESSION["thacel_userid"];
 $posts = $post->get_posts($id);
 
 // collect friends
-$usre = new User();
+$user = new User();
 $id = $_SESSION['thacel_userid'];
 
 $friends = $user->get_friends($id);
