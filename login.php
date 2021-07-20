@@ -1,25 +1,25 @@
 <?php
 session_start();
-	include "class/connect.php";
-	include "class/Login.php";
+include "class/connect.php";
+include "class/Login.php";
 
-	$email = "";
-	$password = "";
+$email = "";
+$password = "";
 
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$login = new Login();
-		$result = $login->evaluate($_POST);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	$login = new Login();
+	$result = $login->evaluate($_POST);
 
-		if ($result != "") {
-			echo "<h4 style='color: red;'>The Error occured</h4>";
-			echo $result;
-			echo "<br>";
-		} else {
-			header("Location: profile.php");
-			die();
-		}
-		$email = $_POST["email"];
-		$password = $_POST["password"];
+	if ($result != "") {
+		echo "<h4 style='color: red;'>The Error occured</h4>";
+		echo $result;
+		echo "<br>";
+	} else {
+		header("Location: profile.php");
+		die();
+	}
+	$email = $_POST["email"];
+	$password = $_POST["password"];
 }
 ?>
 

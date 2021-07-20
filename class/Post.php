@@ -21,6 +21,20 @@ class Post
 		return $this->error;
 	}
 
+	public function get_posts($id)
+	{
+		$query = "SELECT * FROM posts WHERE userid = '$id' ORDER BY id DESC LIMIT 10";
+
+		$DB = new Database();
+		$result = $DB->read($query);
+
+		if ($result) {
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
 	private function create_postid()
 	{
 		$length = rand(4, 19);

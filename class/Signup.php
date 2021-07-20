@@ -18,18 +18,22 @@ class Signup
 			}
 			if ($key == "first_name") {
 				if (is_numeric($value)) {
-					$this->error = $this->error . "First name can't be a number<br>";
+					$this->error =
+						$this->error . "First name can't be a number<br>";
 				}
 				if (strstr($value, " ")) {
-					$this->error = $this->error . "First name can't have a space<br>";
+					$this->error =
+						$this->error . "First name can't have a space<br>";
 				}
 			}
 			if ($key == "last_name") {
 				if (is_numeric($value)) {
-					$this->error = $this->error . "Last name can't be a number<br>";
+					$this->error =
+						$this->error . "Last name can't be a number<br>";
 				}
 				if (strstr($value, " ")) {
-					$this->error = $this->error . "Last name can't have space<br>";
+					$this->error =
+						$this->error . "Last name can't have space<br>";
 				}
 			}
 		}

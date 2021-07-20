@@ -34,9 +34,22 @@ if (
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$post = new Post();
-	$id = $_SESSION['thacel_userid'];
+	$id = $_SESSION["thacel_userid"];
 	$result = $post->create_post($id, $_POST);
+
+	if ($result == "") {
+		header("Location: profile.php");
+		die();
+	} else {
+		echo "<h4 style='color: red;'>The Error occured</h4>";
+		echo $result;
+		echo "<br>";
+	}
 }
+
+$post = new Post();
+$id = $_SESSION["thacel_userid"];
+$posts = $post->get_posts($id);
 ?>
 
 	<h1><?php echo $user_data["first_name"] .
@@ -49,3 +62,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<textarea name="post" placeholder="Write something"></textarea>
 	<input type="submit" value="Post">
 </form>
+<br>
+<br>
+<div>
+<?php 
+	if($posts) {
+		foreach($posts as $ROW) {
+			$user = new User();
+			$ROW_USER = $user->get_user($ROW['userid']);
+			include("post.php");
+		}
+	}
+ ?>
+</div>
