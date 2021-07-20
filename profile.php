@@ -47,9 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 }
 
+// collect posts
 $post = new Post();
 $id = $_SESSION["thacel_userid"];
 $posts = $post->get_posts($id);
+
+// collect friends
+$usre = new User();
+$id = $_SESSION['thacel_userid'];
+
+$friends = $user->get_friends($id);
 ?>
 
 	<h1><?php echo $user_data["first_name"] .
@@ -58,6 +65,7 @@ $posts = $post->get_posts($id);
 	<a href="logout.php">logout</a>
 	<br>
 	<br>
+
 <form method="POST">
 	<textarea name="post" placeholder="Write something"></textarea>
 	<input type="submit" value="Post">
@@ -74,4 +82,13 @@ $posts = $post->get_posts($id);
 		}
 	}
  ?>
+</div>
+<div style="min-height: 100px; flex:1;">
+	<?php
+		if($friends) {
+			foreach($friends as $FRIEND_ROW) {
+				include("user.php");
+			}
+		}
+	?>
 </div>

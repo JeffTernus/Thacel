@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		<input name="password" type="<?php echo $password; ?>" name="password" type="password" id="text" placeholder="Password"><br><br>
 
-		<input type="submit" id="button" value="sign up">
+		<input type="submit" id="button" value="sign in">
 	</form>    
 </body>
 </html>
